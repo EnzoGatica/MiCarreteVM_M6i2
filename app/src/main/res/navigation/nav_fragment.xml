@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/nav_fragment">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_fragment"
+    app:startDestination="@id/fragment_agregar">
 
+    <fragment
+        android:id="@+id/fragment_agregar"
+        android:name="com.example.micarretevm_m6i2.presentation.Fragment_agregar"
+        android:label="fragment_agregar"
+        tools:layout="@layout/fragment_agregar" />
 </navigation>
