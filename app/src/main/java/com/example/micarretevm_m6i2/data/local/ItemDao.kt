@@ -11,4 +11,9 @@ interface ItemDao {
     suspend fun insertItem(item: Item)
     @Query("SELECT * FROM tabla_item order by id ASC")
     fun getAllItems(): LiveData<List<Item>>
+
+    /*
+    @Query("SELECT SUM(precio) FROM TABLA_ITEM")
+    suspend fun getSumPrecio(): LiveData<List<Item>>
+    */
 }

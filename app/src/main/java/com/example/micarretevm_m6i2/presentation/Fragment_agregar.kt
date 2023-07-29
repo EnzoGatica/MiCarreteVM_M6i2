@@ -1,55 +1,74 @@
 package com.example.micarretevm_m6i2.presentation
 
+import android.app.Application
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.fragment.app.activityViewModels
 import com.example.micarretevm_m6i2.R
+import com.example.micarretevm_m6i2.data.local.Item
+import com.example.micarretevm_m6i2.data.local.ItemDao
+import com.example.micarretevm_m6i2.data.local.ItemDataBase
+import com.example.micarretevm_m6i2.databinding.FragmentAgregarBinding
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
 class Fragment_agregar : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
+    lateinit var binding : FragmentAgregarBinding
+    private val itemVm: ItemsViewModel by activityViewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
+
+
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_agregar, container, false)
+       binding = FragmentAgregarBinding.inflate(layoutInflater,container,false)
+        initListener()
+        cargarItems()
+        return binding.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment Fragment_agregar.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            Fragment_agregar().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+    private fun initListener() {
+        binding.btnGuardar.setOnClickListener {
+            val nombre = binding.editTextNombre.text.toString()
+            val precio = binding.editTextPrecio.text.toString().toDouble()
+            val cantidad = binding.editTextCantidad.text.toString().toDouble()
+            guardarItem(nombre,precio,cantidad)
+            binding.editTextNombre.setText("")
+            binding.editTextPrecio.setText("")
+            binding.editTextCantidad.setText("")
+            Toast.makeText(requireContext(), "Item Agregado", Toast.LENGTH_SHORT).show()
+        }
     }
+
+    private fun guardarItem(nombre: String, precio: Double, cantidad: Double) {
+
+        itemVm.insertItem(nombre, precio, cantidad)
+    }
+
+    private fun cargarItems() {
+
+        itemVm.getAllItems().observe(viewLifecycleOwner){
+            var aux = 0
+            for(it in it){
+                val precios = it.precio * it.cantidad
+                aux = (aux + precios).toInt()
+            }
+            /*var contador = it.joinToString("\n") { it.precio.toString() }
+            val listaPrecios = contador.split("\n").map { it.toDouble() }
+            val sumaPrecios = listaPrecios.sum()
+            */
+            binding.txtResultado.text = "$aux"
+        }
+
+    }
+
+
 }
