@@ -65,7 +65,7 @@ class Fragment_agregar : Fragment() {
             val listaPrecios = contador.split("\n").map { it.toDouble() }
             val sumaPrecios = listaPrecios.sum()
             */
-            binding.txtResultado.text = "$aux"
+            binding.txtResultado.text = "$ $aux"
         }
 
     }
