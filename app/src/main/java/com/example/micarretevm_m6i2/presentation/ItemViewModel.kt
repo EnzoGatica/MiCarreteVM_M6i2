@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.micarretevm_m6i2.data.Repositorio
 import com.example.micarretevm_m6i2.data.local.Item
 import com.example.micarretevm_m6i2.data.local.ItemDataBase
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class ItemsViewModel(application: Application) : AndroidViewModel(application) {
@@ -24,5 +25,10 @@ class ItemsViewModel(application: Application) : AndroidViewModel(application) {
     fun insertItem(nombre: String, precio: Double, cantidad: Double) = viewModelScope.launch {
         val item = Item(nombre, precio, cantidad)
         repositorio.insertItem(item)
+    }
+
+    suspend fun deleteDatoView() {
+        viewModelScope.launch { Dispatchers.IO }
+        repositorio.deleteDatos()
     }
 }

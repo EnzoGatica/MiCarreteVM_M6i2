@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
+import androidx.room.Delete
 
 @Dao
 interface ItemDao {
@@ -16,4 +17,7 @@ interface ItemDao {
     @Query("SELECT SUM(precio) FROM TABLA_ITEM")
     suspend fun getSumPrecio(): LiveData<List<Item>>
     */
+
+    @Query("DELETE FROM tabla_item")
+    suspend fun deleteDatos()
 }

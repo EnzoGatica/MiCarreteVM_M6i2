@@ -12,4 +12,8 @@ class Repositorio(private val itemDao: ItemDao) {
     fun cargarItem(): LiveData<List<Item>>{
         return itemDao.getAllItems() //obtener datos
     }
+
+    suspend fun deleteDatos() {
+        itemDao.deleteDatos()
+    }
 }

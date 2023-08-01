@@ -7,19 +7,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.example.micarretevm_m6i2.R
 import com.example.micarretevm_m6i2.databinding.FragmentListBinding
+import kotlinx.coroutines.launch
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [ListFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class ListFragment : Fragment() {
     private val itemVm: ItemsViewModel by activityViewModels()
     lateinit var binding: FragmentListBinding
@@ -37,7 +30,17 @@ class ListFragment : Fragment() {
     ): View? {
         binding = FragmentListBinding.inflate(inflater,container,false)
         initLista()
+        initDelete()
         return binding.root
+    }
+
+    private fun initDelete() {
+        binding.flotanteDelete.setOnClickListener() {
+            viewLifecycleOwner.lifecycleScope.launch {
+                itemVm.deleteDatoView()
+                findNavController().navigate(R.id.action_listFragment_to_fragment_agregar)
+            }
+        }
     }
 
     private fun initLista() {

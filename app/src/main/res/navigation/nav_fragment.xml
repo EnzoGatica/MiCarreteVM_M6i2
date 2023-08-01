@@ -18,5 +18,9 @@
         android:id="@+id/listFragment"
         android:name="com.example.micarretevm_m6i2.presentation.ListFragment"
         android:label="fragment_list"
-        tools:layout="@layout/fragment_list" />
+        tools:layout="@layout/fragment_list" >
+        <action
+            android:id="@+id/action_listFragment_to_fragment_agregar"
+            app:destination="@id/fragment_agregar" />
+    </fragment>
 </navigation>
