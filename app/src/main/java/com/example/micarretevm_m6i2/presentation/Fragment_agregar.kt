@@ -40,6 +40,7 @@ class Fragment_agregar : Fragment() {
             val nombre = binding.editTextNombre.text.toString()
             val precio = binding.editTextPrecio.text.toString().toDouble()
             val cantidad = binding.editTextCantidad.text.toString().toDouble()
+            //itemVm.insertItem(nombre, precio, cantidad) <- se puede hacer directo sin usar el metodo.
             guardarItem(nombre,precio,cantidad)
             binding.editTextNombre.setText("")
             binding.editTextPrecio.setText("")
@@ -49,7 +50,6 @@ class Fragment_agregar : Fragment() {
     }
 
     private fun guardarItem(nombre: String, precio: Double, cantidad: Double) {
-
         itemVm.insertItem(nombre, precio, cantidad)
     }
 
