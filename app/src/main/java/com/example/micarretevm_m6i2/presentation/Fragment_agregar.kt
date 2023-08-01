@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import com.example.micarretevm_m6i2.R
 import com.example.micarretevm_m6i2.data.local.Item
 import com.example.micarretevm_m6i2.data.local.ItemDao
@@ -46,6 +47,10 @@ class Fragment_agregar : Fragment() {
             binding.editTextPrecio.setText("")
             binding.editTextCantidad.setText("")
             Toast.makeText(requireContext(), "Item Agregado", Toast.LENGTH_SHORT).show()
+        }
+
+        binding.floatList.setOnClickListener{
+            findNavController().navigate(R.id.action_fragment_agregar_to_listFragment)
         }
     }
 

@@ -21,6 +21,11 @@ class ItemAdapter : RecyclerView.Adapter<ItemAdapter.ItemViewHolder>() {
         return ItemViewHolder(binding)
     }
 
+    fun setData(item: List<Item>){
+        this.listItem.clear()
+        this. listItem.addAll(item)
+        notifyDataSetChanged()
+    }
     override fun getItemCount(): Int {
         return listItem.size
     }
